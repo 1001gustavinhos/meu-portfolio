@@ -1,22 +1,7 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
-import React from "react";
-import gsap from "gsap";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { title } from "process";
-
-const project = [
-  {
-    title: "Projects",
-    image: "/images/project.png",
-    altText: "Project Image",
-    description:
-      "Site institucional da empresa Biológika, especializada em biotecnologia. O objetivo foi criar uma presença digital profissional, leve e responsiva, que refletisse os valores da empresa e sua atuação na área de soluções ambientais. Cuidei de toda a estrutura do front-end, priorizando a responsividade, performance e identidade visual que respeitasse a marca e seriedade da empresa.",
-    tags: ["React", "Tailwind", "Vite", "Figma"],
-  },
-];
 
 interface ProjectsProps {
   title: string;
@@ -33,27 +18,50 @@ export const ProjectsSection = ({
   tags,
   altText,
 }: ProjectsProps) => {
+  const maskRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section className="flex bg-background flex-col gap-6 max-w-4xl p-8">
-      <Image
-        src={image}
-        className="bg-foreground flex mx-auto shadow-md mb-4"
-        alt={altText}
-        width={600}
-        height={500}
-        objectFit="cover"
-      />
-      <h2 className="text-center text-4xl font-pt-mono">{title}</h2>
-      <p className="text-base font-fira-mono">{description}</p>
-      <div className="flex flex-wrap font-fira-mono gap-4 text-start">
-        {tags.map((tag, i) => (
-          <div
-            key={i}
-            className="border-foreground xgap-3 border-2 rounded-lg px-2.5 py-1.5 text-sm"
-          >
-            {tag}
+    <section className="relative w-full min-h-screen overflow-hidden">
+      {/* Camada superior escura com máscara */}
+      <div className="absolute inset-0 z-10 bg-background text-white pointer-events-none">
+        {/* Máscara circular dinâmica */}
+        <div
+          ref={maskRef}
+          className="absolute w-64 h-64 rounded-full"
+          style={{
+            WebkitMaskImage:
+              "radial-gradient(circle 32% at center, transparent 40%, black 41%)",
+            maskImage:
+              "radial-gradient(circle 32% at center, transparent 40%, black 41%)",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            backgroundColor: "inherit",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Conteúdo com a máscara aplicada */}
+        <div className="relative z-20 max-w-4xl p-8 mx-auto pt-40">
+          <Image
+            src={image}
+            className="mx-auto shadow-md mb-4"
+            alt={altText}
+            width={600}
+            height={500}
+          />
+          <h2 className="text-center text-4xl font-pt-mono">{title}</h2>
+          <p className="text-base font-fira-mono">{description}</p>
+          <div className="flex flex-wrap font-fira-mono gap-4 text-start mt-4">
+            {tags.map((tag, i) => (
+              <div
+                key={i}
+                className="border-white border-2 rounded-lg px-2.5 py-1.5 text-sm"
+              >
+                {tag}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

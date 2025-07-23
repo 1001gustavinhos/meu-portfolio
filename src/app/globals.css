@@ -35,3 +35,11 @@ body {
   --font-fira-mono: "Fira Mono", monospace;
   --font-pt-mono: "PT Mono", monospace;
 }
+
+.reveal-layer {
+  transition: mask-position 2s ease, -webkit-mask-position 2s ease;
+}
+
+.reveal-effect {
+  transition: --size 0.3s ease;
+}

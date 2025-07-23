@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Fira_Mono, PT_Mono } from "next/font/google";
 import { Metadata } from "next";
 
