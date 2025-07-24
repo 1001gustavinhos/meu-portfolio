@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 interface ProjectsProps {
@@ -22,49 +21,105 @@ export const ProjectsSectionReveal = ({
 }: ProjectsProps) => {
   const revealRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const maskSizeRef = useRef(100);
+  const animationRef = useRef<number>();
+  const [maskSize, setMaskSize] = useState(100);
+  const [position, setPosition] = useState({ x: 0, y: 0, scrollY: 0 });
+  const lastPosition = useRef({ x: 0, y: 0, scrollY: 0 });
+  const lastMouseMoveTime = useRef(0);
+  const isScrolling = useRef(false);
+
+  // Configuração da animação suave
+  const lerp = (start: number, end: number, t: number) => {
+    return start * (1 - t) + end * t;
+  };
+
+  const animate = () => {
+    if (!revealRef.current || !containerRef.current) return;
+
+    const now = Date.now();
+    const timeSinceLastMouseMove = now - lastMouseMoveTime.current;
+    const isMouseActive = timeSinceLastMouseMove < 100;
+
+    // Suavização diferente baseada na atividade do mouse
+    const lerpFactor = isMouseActive ? 0.2 : 0.05;
+
+    // Calcula a posição suavizada
+    const smoothX = lerp(lastPosition.current.x, position.x, lerpFactor);
+    let smoothY = position.y;
+
+    // Se não estiver movendo o mouse, ajusta a posição Y com o scroll
+    if (!isMouseActive) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const viewportY = lastPosition.current.y - lastPosition.current.scrollY;
+      smoothY = viewportY + window.scrollY;
+    } else {
+      smoothY = lerp(lastPosition.current.y, position.y, lerpFactor);
+    }
+
+    revealRef.current.style.setProperty("--x", `${smoothX}px`);
+    revealRef.current.style.setProperty("--y", `${smoothY}px`);
+    revealRef.current.style.setProperty("--size", `${maskSize}px`);
+
+    lastPosition.current = {
+      x: smoothX,
+      y: smoothY,
+      scrollY: window.scrollY,
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    animationRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, [position, maskSize]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (revealRef.current && containerRef.current) {
-        const containerRect = containerRef.current.getBoundingClientRect();
-        const x = e.clientX - containerRect.left;
-        const y = e.clientY - containerRect.top;
+      if (!containerRef.current) return;
 
-        // Verifica se o mouse está sobre algum elemento de texto
-        const elements = document.elementsFromPoint(e.clientX, e.clientY);
-        const isOverText = elements.some(
-          (el) =>
-            el.classList.contains("text-element") || el.closest(".text-element")
-        );
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const x = e.clientX - containerRect.left;
+      const y = e.clientY - containerRect.top - window.scrollY;
 
-        // Atualiza o tamanho com transição suave
-        const targetSize = isOverText ? 150 : 50;
-        if (Math.abs(maskSizeRef.current - targetSize) > 5) {
-          maskSizeRef.current += (targetSize - maskSizeRef.current) * 0.2;
-        } else {
-          maskSizeRef.current = targetSize;
-        }
+      // Atualiza o tempo do último movimento do mouse
+      lastMouseMoveTime.current = Date.now();
+      isScrolling.current = false;
 
-        revealRef.current.style.setProperty("--x", `${x}px`);
-        revealRef.current.style.setProperty("--y", `${y}px`);
-        revealRef.current.style.setProperty(
-          "--size",
-          `${maskSizeRef.current}px`
-        );
+      // Verifica se está sobre texto para aumentar a máscara
+      const elements = document.elementsFromPoint(e.clientX, e.clientY);
+      const isOverText = elements.some(
+        (el) =>
+          el.classList.contains("text-element") || el.closest(".text-element")
+      );
 
-        // Força repaint para garantir a animação
-        revealRef.current.style.willChange = "mask-image, -webkit-mask-image";
+      setMaskSize(isOverText ? 150 : 50);
+      setPosition({
+        x,
+        y: y + window.scrollY,
+        scrollY: window.scrollY,
+      });
+    };
+
+    const handleScroll = () => {
+      isScrolling.current = true;
+      // Durante o scroll, apenas atualiza a posição Y se o mouse não estiver ativo
+      if (Date.now() - lastMouseMoveTime.current > 100) {
+        setPosition((prev) => ({
+          ...prev,
+          scrollY: window.scrollY,
+        }));
       }
     };
 
-    const animationFrame = requestAnimationFrame(() => {
-      window.addEventListener("mousemove", handleMouseMove);
-    });
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      cancelAnimationFrame(animationFrame);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -79,24 +134,24 @@ export const ProjectsSectionReveal = ({
           {image && (
             <Image
               src={image}
-              className="bg-foreground flex mx-auto shadow-md mb-4 transition-all duration-300"
+              className="bg-foreground flex mx-auto shadow-md mb-4 transition-all duration-300 ease-out"
               alt={altText}
               width={600}
               height={500}
               objectFit="cover"
             />
           )}
-          <h2 className="text-center text-4xl text-foreground font-pt-mono text-element transition-all duration-300">
+          <h2 className="text-center text-4xl text-foreground font-pt-mono text-element transition-all duration-300 ease-out">
             {title}
           </h2>
-          <p className="text-base text-foreground font-fira-mono text-element transition-all duration-300">
+          <p className="text-base text-foreground font-fira-mono text-element transition-all duration-300 ease-out">
             {description}
           </p>
           <div className="flex flex-wrap font-fira-mono gap-4 text-start text-element">
             {tags.map((tag, i) => (
               <div
                 key={i}
-                className="border-foreground text-foreground gap-3 border-2 rounded-lg px-2.5 py-1.5 text-sm text-element transition-all duration-300"
+                className="border-foreground text-foreground gap-3 border-2 rounded-lg px-2.5 py-1.5 text-sm text-element transition-all duration-300 ease-out"
               >
                 {tag}
               </div>
@@ -108,7 +163,7 @@ export const ProjectsSectionReveal = ({
       {/* Camada superior (reveal) com máscara */}
       <div
         ref={revealRef}
-        className="absolute inset-0 bg-foreground z-10 flex items-center justify-center pointer-events-none transition-mask duration-300 ease-out"
+        className="absolute inset-0 bg-foreground z-10 flex items-center justify-center pointer-events-none"
         style={{
           maskImage:
             "radial-gradient(circle var(--size, 100px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
@@ -116,13 +171,13 @@ export const ProjectsSectionReveal = ({
             "radial-gradient(circle var(--size, 100px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
           maskRepeat: "no-repeat",
           WebkitMaskRepeat: "no-repeat",
-          transitionProperty: "mask-image, -webkit-mask-image",
-          transitionDuration: "300ms",
-          transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          transition:
+            "mask-size 0.4s cubic-bezier(0.16, 1, 0.3, 1), -webkit-mask-size 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          willChange: "transform, mask-position, -webkit-mask-position",
         }}
       >
         <section className="flex flex-col gap-6 max-w-4xl p-8">
-          {image && (
+          {imageReveal && (
             <Image
               src={imageReveal}
               className="bg-background flex mx-auto shadow-md mb-4"
