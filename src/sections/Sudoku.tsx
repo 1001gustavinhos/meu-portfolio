@@ -131,7 +131,7 @@ export default function SudokuSection() {
       </h1>
 
       {gameOver && (
-        <div className="mb-4 p-3 bg-red-100 text-red-800 rounded-md">
+        <div className="mb-4 p-3 bg-foreground font-fira-mono text-background rounded-md">
           <p className="font-bold">Ops! Sem opções disponíveis.</p>
           <p>Tente novamente!</p>
         </div>

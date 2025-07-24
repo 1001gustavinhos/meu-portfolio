@@ -1,5 +1,6 @@
 "use client";
 import { ProjectsReveal } from "@/sections/ProjectsSectionReveal";
+import SudokuSection from "@/sections/Sudoku";
 
 const projects = [
   {
@@ -24,7 +25,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center">
       <ProjectsReveal projects={projects} />
-      {/* Outros componentes como SudokuSection */}
+      <SudokuSection />
     </div>
   );
 }
