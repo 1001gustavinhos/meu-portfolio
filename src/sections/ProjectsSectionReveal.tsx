@@ -36,25 +36,13 @@ export const ProjectsSectionReveal = ({
   const animate = () => {
     if (!revealRef.current || !containerRef.current) return;
 
-    const now = Date.now();
-    const timeSinceLastMouseMove = now - lastMouseMoveTime.current;
-    const isMouseActive = timeSinceLastMouseMove < 100;
-
     // Suavização diferente baseada na atividade do mouse
-    const lerpFactor = isMouseActive ? 0.2 : 0.05;
+    const lerpFactor = 0.2;
 
     // Calcula a posição suavizada
     const smoothX = lerp(lastPosition.current.x, position.x, lerpFactor);
-    let smoothY = position.y;
-
-    // Se não estiver movendo o mouse, ajusta a posição Y com o scroll
-    if (!isMouseActive) {
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const viewportY = lastPosition.current.y - lastPosition.current.scrollY;
-      smoothY = viewportY + window.scrollY;
-    } else {
-      smoothY = lerp(lastPosition.current.y, position.y, lerpFactor);
-    }
+    const viewportY = lastPosition.current.y;
+    const smoothY = lerp(viewportY, position.y + window.scrollY, lerpFactor);
 
     revealRef.current.style.setProperty("--x", `${smoothX}px`);
     revealRef.current.style.setProperty("--y", `${smoothY}px`);
@@ -84,8 +72,6 @@ export const ProjectsSectionReveal = ({
       const x = e.clientX - containerRect.left;
       const y = e.clientY - containerRect.top - window.scrollY;
 
-      // Atualiza o tempo do último movimento do mouse
-      lastMouseMoveTime.current = Date.now();
       isScrolling.current = false;
 
       // Verifica se está sobre texto para aumentar a máscara
@@ -95,10 +81,10 @@ export const ProjectsSectionReveal = ({
           el.classList.contains("text-element") || el.closest(".text-element")
       );
 
-      setMaskSize(isOverText ? 150 : 50);
+      setMaskSize(isOverText ? 180 : 20);
       setPosition({
         x,
-        y: y + window.scrollY,
+        y: y,
         scrollY: window.scrollY,
       });
     };
@@ -106,12 +92,10 @@ export const ProjectsSectionReveal = ({
     const handleScroll = () => {
       isScrolling.current = true;
       // Durante o scroll, apenas atualiza a posição Y se o mouse não estiver ativo
-      if (Date.now() - lastMouseMoveTime.current > 100) {
-        setPosition((prev) => ({
-          ...prev,
-          scrollY: window.scrollY,
-        }));
-      }
+      setPosition((prev) => ({
+        ...prev,
+        scrollY: window.scrollY,
+      }));
     };
 
     window.addEventListener("mousemove", handleMouseMove);
