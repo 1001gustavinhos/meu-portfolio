@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-interface ProjectsProps {
+interface Project {
   title: string;
   image: string;
   imageReveal: string;
@@ -11,25 +11,53 @@ interface ProjectsProps {
   altText: string;
 }
 
-export const ProjectsSectionReveal = ({
+interface ProjectsRevealProps {
+  projects: Project[];
+}
+
+export const ProjectsReveal = ({ projects }: ProjectsRevealProps) => {
+  return (
+    <div className="w-full">
+      {projects.map((project, index) => (
+        <SingleProjectReveal
+          key={index}
+          title={project.title}
+          image={project.image}
+          imageReveal={project.imageReveal}
+          description={project.description}
+          tags={project.tags}
+          altText={project.altText}
+        />
+      ))}
+    </div>
+  );
+};
+
+const SingleProjectReveal = ({
   title,
   image,
   imageReveal,
   description,
   tags,
   altText,
-}: ProjectsProps) => {
+}: {
+  title: string;
+  image: string;
+  imageReveal: string;
+  description: string;
+  tags: string[];
+  altText: string;
+}) => {
   const revealRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
-  const [maskSize, setMaskSize] = useState(0); // Começa com 0 para ficar invisível
+  const [maskSize, setMaskSize] = useState(0);
   const [smoothMaskSize, setSmoothMaskSize] = useState(0);
   const [position, setPosition] = useState({ x: 0, y: 0, scrollY: 0 });
   const lastPosition = useRef({ x: 0, y: 0, scrollY: 0 });
   const isScrolling = useRef(false);
-  const hasMouseMoved = useRef(false); // Novo ref para rastrear se o mouse se moveu
+  const hasMouseMoved = useRef(false);
 
-  // Configuração da animação suave
   const lerp = (start: number, end: number, t: number) => {
     return start * (1 - t) + end * t;
   };
@@ -37,11 +65,9 @@ export const ProjectsSectionReveal = ({
   const animate = () => {
     if (!revealRef.current || !containerRef.current) return;
 
-    // Suavização diferente baseada na atividade do mouse
     const positionLerpFactor = 0.2;
     const sizeLerpFactor = 0.1;
 
-    // Calcula a posição suavizada
     const smoothX = lerp(
       lastPosition.current.x,
       position.x,
@@ -54,8 +80,7 @@ export const ProjectsSectionReveal = ({
       positionLerpFactor
     );
 
-    // Suaviza a mudança de tamanho da máscara
-    const targetSize = hasMouseMoved.current ? maskSize : 0; // Mantém 0 até o mouse se mover
+    const targetSize = hasMouseMoved.current ? maskSize : 0;
     const newSmoothSize = lerp(smoothMaskSize, targetSize, sizeLerpFactor);
     setSmoothMaskSize(newSmoothSize);
 
@@ -83,10 +108,9 @@ export const ProjectsSectionReveal = ({
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
 
-      // Marca que o mouse se moveu pela primeira vez
       if (!hasMouseMoved.current) {
         hasMouseMoved.current = true;
-        setMaskSize(20); // Tamanho inicial quando o mouse começa a se mover
+        setMaskSize(20);
       }
 
       const containerRect = containerRef.current.getBoundingClientRect();
@@ -95,7 +119,6 @@ export const ProjectsSectionReveal = ({
 
       isScrolling.current = false;
 
-      // Verifica se está sobre texto para aumentar a máscara
       const elements = document.elementsFromPoint(e.clientX, e.clientY);
       const isOverText = elements.some(
         (el) =>
@@ -132,7 +155,7 @@ export const ProjectsSectionReveal = ({
       ref={containerRef}
       className="relative w-full min-h-screen overflow-hidden flex items-center justify-center"
     >
-      {/* Camada de fundo (base) */}
+      {/* Camada de fundo */}
       <div className="absolute inset-0 bg-background z-0 flex items-center justify-center">
         <section className="flex flex-col gap-6 max-w-4xl p-8 text-element">
           {image && (
@@ -164,7 +187,7 @@ export const ProjectsSectionReveal = ({
         </section>
       </div>
 
-      {/* Camada superior (reveal) com máscara */}
+      {/* Camada de reveal */}
       <div
         ref={revealRef}
         className="absolute inset-0 bg-foreground z-10 flex items-center justify-center pointer-events-none"
