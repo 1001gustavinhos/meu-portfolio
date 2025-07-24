@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface ProjectsProps {
   title: string;
@@ -23,9 +24,9 @@ export const ProjectsSectionReveal = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
   const [maskSize, setMaskSize] = useState(100);
+  const [smoothMaskSize, setSmoothMaskSize] = useState(100);
   const [position, setPosition] = useState({ x: 0, y: 0, scrollY: 0 });
   const lastPosition = useRef({ x: 0, y: 0, scrollY: 0 });
-  const lastMouseMoveTime = useRef(0);
   const isScrolling = useRef(false);
 
   // Configuração da animação suave
@@ -37,16 +38,29 @@ export const ProjectsSectionReveal = ({
     if (!revealRef.current || !containerRef.current) return;
 
     // Suavização diferente baseada na atividade do mouse
-    const lerpFactor = 0.2;
+    const positionLerpFactor = 0.2;
+    const sizeLerpFactor = 0.1; // Fator mais lento para suavizar o tamanho
 
     // Calcula a posição suavizada
-    const smoothX = lerp(lastPosition.current.x, position.x, lerpFactor);
+    const smoothX = lerp(
+      lastPosition.current.x,
+      position.x,
+      positionLerpFactor
+    );
     const viewportY = lastPosition.current.y;
-    const smoothY = lerp(viewportY, position.y + window.scrollY, lerpFactor);
+    const smoothY = lerp(
+      viewportY,
+      position.y + window.scrollY,
+      positionLerpFactor
+    );
+
+    // Suaviza a mudança de tamanho da máscara
+    const newSmoothSize = lerp(smoothMaskSize, maskSize, sizeLerpFactor);
+    setSmoothMaskSize(newSmoothSize);
 
     revealRef.current.style.setProperty("--x", `${smoothX}px`);
     revealRef.current.style.setProperty("--y", `${smoothY}px`);
-    revealRef.current.style.setProperty("--size", `${maskSize}px`);
+    revealRef.current.style.setProperty("--size", `${newSmoothSize}px`);
 
     lastPosition.current = {
       x: smoothX,
@@ -91,7 +105,6 @@ export const ProjectsSectionReveal = ({
 
     const handleScroll = () => {
       isScrolling.current = true;
-      // Durante o scroll, apenas atualiza a posição Y se o mouse não estiver ativo
       setPosition((prev) => ({
         ...prev,
         scrollY: window.scrollY,
@@ -156,7 +169,7 @@ export const ProjectsSectionReveal = ({
           maskRepeat: "no-repeat",
           WebkitMaskRepeat: "no-repeat",
           transition:
-            "mask-size 0.4s cubic-bezier(0.16, 1, 0.3, 1), -webkit-mask-size 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            "mask-position 0.1s linear, -webkit-mask-position 0.1s linear",
           willChange: "transform, mask-position, -webkit-mask-position",
         }}
       >

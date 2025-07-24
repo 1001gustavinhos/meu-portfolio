@@ -28,6 +28,14 @@ export default function Home() {
         description="Site institucional da empresa Biológika, especializada em biotecnologia. O objetivo foi criar uma presença digital profissional, leve e responsiva, que refletisse os valores da empresa e sua atuação na área de soluções ambientais. Cuidei de toda a estrutura do front-end, priorizando a responsividade, performance e identidade visual que respeitasse a marca e seriedade da empresa."
         tags={["Web Development", "Design", "JavaScript", "React"]}
       />
+      <ProjectsSectionReveal
+        title="My Projects"
+        image="/1984.jpg"
+        imageReveal="/alienista.jpg"
+        altText="Project Image"
+        description="Site institucional da empresa Biológika, especializada em biotecnologia. O objetivo foi criar uma presença digital profissional, leve e responsiva, que refletisse os valores da empresa e sua atuação na área de soluções ambientais. Cuidei de toda a estrutura do front-end, priorizando a responsividade, performance e identidade visual que respeitasse a marca e seriedade da empresa."
+        tags={["Web Development", "Design", "JavaScript", "React"]}
+      />
 
       <SudokuSection />
     </div>
