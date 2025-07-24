@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 interface ProjectsProps {
   title: string;
@@ -23,11 +22,12 @@ export const ProjectsSectionReveal = ({
   const revealRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
-  const [maskSize, setMaskSize] = useState(100);
-  const [smoothMaskSize, setSmoothMaskSize] = useState(100);
+  const [maskSize, setMaskSize] = useState(0); // Começa com 0 para ficar invisível
+  const [smoothMaskSize, setSmoothMaskSize] = useState(0);
   const [position, setPosition] = useState({ x: 0, y: 0, scrollY: 0 });
   const lastPosition = useRef({ x: 0, y: 0, scrollY: 0 });
   const isScrolling = useRef(false);
+  const hasMouseMoved = useRef(false); // Novo ref para rastrear se o mouse se moveu
 
   // Configuração da animação suave
   const lerp = (start: number, end: number, t: number) => {
@@ -39,7 +39,7 @@ export const ProjectsSectionReveal = ({
 
     // Suavização diferente baseada na atividade do mouse
     const positionLerpFactor = 0.2;
-    const sizeLerpFactor = 0.1; // Fator mais lento para suavizar o tamanho
+    const sizeLerpFactor = 0.1;
 
     // Calcula a posição suavizada
     const smoothX = lerp(
@@ -55,7 +55,8 @@ export const ProjectsSectionReveal = ({
     );
 
     // Suaviza a mudança de tamanho da máscara
-    const newSmoothSize = lerp(smoothMaskSize, maskSize, sizeLerpFactor);
+    const targetSize = hasMouseMoved.current ? maskSize : 0; // Mantém 0 até o mouse se mover
+    const newSmoothSize = lerp(smoothMaskSize, targetSize, sizeLerpFactor);
     setSmoothMaskSize(newSmoothSize);
 
     revealRef.current.style.setProperty("--x", `${smoothX}px`);
@@ -81,6 +82,12 @@ export const ProjectsSectionReveal = ({
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
+
+      // Marca que o mouse se moveu pela primeira vez
+      if (!hasMouseMoved.current) {
+        hasMouseMoved.current = true;
+        setMaskSize(20); // Tamanho inicial quando o mouse começa a se mover
+      }
 
       const containerRect = containerRef.current.getBoundingClientRect();
       const x = e.clientX - containerRect.left;
@@ -133,8 +140,8 @@ export const ProjectsSectionReveal = ({
               src={image}
               className="bg-foreground flex mx-auto shadow-md mb-4 transition-all duration-300 ease-out"
               alt={altText}
-              width={600}
-              height={500}
+              width={696 / 2}
+              height={1000 / 2}
               objectFit="cover"
             />
           )}
@@ -163,9 +170,9 @@ export const ProjectsSectionReveal = ({
         className="absolute inset-0 bg-foreground z-10 flex items-center justify-center pointer-events-none"
         style={{
           maskImage:
-            "radial-gradient(circle var(--size, 100px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
+            "radial-gradient(circle var(--size, 0px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
           WebkitMaskImage:
-            "radial-gradient(circle var(--size, 100px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
+            "radial-gradient(circle var(--size, 0px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
           maskRepeat: "no-repeat",
           WebkitMaskRepeat: "no-repeat",
           transition:
@@ -179,8 +186,8 @@ export const ProjectsSectionReveal = ({
               src={imageReveal}
               className="bg-background flex mx-auto shadow-md mb-4"
               alt={altText}
-              width={600}
-              height={500}
+              width={696 / 2}
+              height={1000 / 2}
               objectFit="cover"
             />
           )}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import clsx from "clsx";
 
 const SIZE = 9;
@@ -20,11 +20,13 @@ export default function SudokuSection() {
   );
 
   const [activeCells, setActiveCells] = useState<[number, number][]>([]);
+  const [gameOver, setGameOver] = useState(false);
 
   // Calcula os números possíveis para cada célula vazia
   const cellPossibilities = useMemo(() => {
     const possibilities: Record<string, number[]> = {};
     const counts: number[] = [];
+    let hasEmptyCellWithNoOptions = false;
 
     for (let row = 0; row < SIZE; row++) {
       for (let col = 0; col < SIZE; col++) {
@@ -51,10 +53,18 @@ export default function SudokuSection() {
           return true;
         });
 
+        // Verifica se há células sem opções
+        if (possibleNumbers.length === 0) {
+          hasEmptyCellWithNoOptions = true;
+        }
+
         possibilities[`${row},${col}`] = possibleNumbers;
         counts.push(possibleNumbers.length);
       }
     }
+
+    // Atualiza o estado de gameOver
+    setGameOver(hasEmptyCellWithNoOptions);
 
     // Encontra o menor número de possibilidades
     const minCount = counts.length > 0 ? Math.min(...counts) : 0;
@@ -77,7 +87,7 @@ export default function SudokuSection() {
   }, [cellPossibilities]);
 
   function handleNumberClick(row: number, col: number, num: number) {
-    if (fixedGrid[row][col] !== null) return;
+    if (fixedGrid[row][col] !== null || gameOver) return;
 
     setFixedGrid((oldGrid) => {
       const newGrid = oldGrid.map((r) => r.slice());
@@ -107,6 +117,7 @@ export default function SudokuSection() {
   function resetGrid() {
     setFixedGrid(Array.from({ length: SIZE }, () => Array(SIZE).fill(null)));
     setActiveCells([]);
+    setGameOver(false);
   }
 
   function isCellActive(row: number, col: number) {
@@ -118,6 +129,13 @@ export default function SudokuSection() {
       <h1 className="text-2xl font-bold font-fira-mono mb-4">
         Gerador de Sudoku
       </h1>
+
+      {gameOver && (
+        <div className="mb-4 p-3 bg-red-100 text-red-800 rounded-md">
+          <p className="font-bold">Ops! Sem opções disponíveis.</p>
+          <p>Tente novamente!</p>
+        </div>
+      )}
 
       <div
         className="grid font-fira-mono"
@@ -156,7 +174,8 @@ export default function SudokuSection() {
                     key={cellIndex}
                     className={clsx(
                       "border border-foreground flex items-center justify-center",
-                      !fixedValue && !isActive && "bg-foreground/10"
+                      !fixedValue && !isActive && "bg-foreground/10",
+                      gameOver && fixedValue === null && "bg-red-100/50"
                     )}
                     style={{ aspectRatio: "1 / 1" }}
                   >
@@ -171,14 +190,15 @@ export default function SudokuSection() {
                             <button
                               key={num}
                               onClick={() => handleNumberClick(row, col, num)}
-                              disabled={hidden || !isActive}
+                              disabled={hidden || !isActive || gameOver}
                               className={clsx(
                                 "flex items-center justify-center text-[9px] md:text-[10px] md:p-2 p-1 transition-all duration-300",
                                 hidden
                                   ? "opacity-0 pointer-events-none"
                                   : isActive
                                   ? "opacity-100 hover:bg-foreground/20 cursor-pointer"
-                                  : "opacity-50 text-foreground/40 cursor-not-allowed"
+                                  : "opacity-50 text-foreground/40 cursor-not-allowed",
+                                gameOver && "cursor-not-allowed"
                               )}
                               type="button"
                             >
