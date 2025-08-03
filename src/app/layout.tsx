@@ -1,4 +1,4 @@
-import { Fira_Mono, PT_Mono } from "next/font/google";
+import { Fira_Mono, PT_Mono, Fascinate } from "next/font/google";
 import { Metadata } from "next";
 
 import "./globals.css";
@@ -15,6 +15,12 @@ const ptMono = PT_Mono({
   weight: "400",
 });
 
+const fascinate = Fascinate({
+  subsets: ["latin"],
+  variable: "--font-fascinate",
+  weight: "400",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${firaMono.variable} ${ptMono.variable} font-sans`}
+      className={`${firaMono.variable} ${ptMono.variable} ${fascinate.variable}`}
     >
       <body>{children}</body>
     </html>

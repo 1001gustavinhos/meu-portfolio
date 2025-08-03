@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { useMask } from "@/context/MaskContext";
 
 interface Project {
   title: string;
@@ -40,85 +41,34 @@ const SingleProjectReveal = ({
   description,
   tags,
   altText,
-}: {
-  title: string;
-  image: string;
-  imageReveal: string;
-  description: string;
-  tags: string[];
-  altText: string;
-}) => {
+}: Project) => {
   const revealRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
-  const [maskSize, setMaskSize] = useState(0);
-  const [smoothMaskSize, setSmoothMaskSize] = useState(0);
-  const [position, setPosition] = useState({ x: 0, y: 0, scrollY: 0 });
-  const lastPosition = useRef({ x: 0, y: 0, scrollY: 0 });
-  const isScrolling = useRef(false);
-  const hasMouseMoved = useRef(false);
+  const { position, smoothMaskSize, setMaskSize, hasMouseMoved } = useMask();
 
-  const lerp = (start: number, end: number, t: number) => {
-    return start * (1 - t) + end * t;
-  };
-
-  const animate = () => {
+  // Atualiza a posição da máscara
+  useEffect(() => {
     if (!revealRef.current || !containerRef.current) return;
 
-    const positionLerpFactor = 0.2;
-    const sizeLerpFactor = 0.1;
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const relativeX = position.x - containerRect.left;
+    const relativeY = position.y - containerRect.top;
 
-    const smoothX = lerp(
-      lastPosition.current.x,
-      position.x,
-      positionLerpFactor
-    );
-    const viewportY = lastPosition.current.y;
-    const smoothY = lerp(
-      viewportY,
-      position.y + window.scrollY,
-      positionLerpFactor
-    );
+    revealRef.current.style.setProperty("--x", `${relativeX}px`);
+    revealRef.current.style.setProperty("--y", `${relativeY}px`);
+    revealRef.current.style.setProperty("--size", `${smoothMaskSize}px`);
+  }, [position, smoothMaskSize]);
 
-    const targetSize = hasMouseMoved.current ? maskSize : 0;
-    const newSmoothSize = lerp(smoothMaskSize, targetSize, sizeLerpFactor);
-    setSmoothMaskSize(newSmoothSize);
-
-    revealRef.current.style.setProperty("--x", `${smoothX}px`);
-    revealRef.current.style.setProperty("--y", `${smoothY}px`);
-    revealRef.current.style.setProperty("--size", `${newSmoothSize}px`);
-
-    lastPosition.current = {
-      x: smoothX,
-      y: smoothY,
-      scrollY: window.scrollY,
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    animationRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
-  }, [position, maskSize]);
-
+  // Configura o tamanho da máscara quando o mouse entra no projeto
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
 
-      if (!hasMouseMoved.current) {
-        hasMouseMoved.current = true;
-        setMaskSize(20);
-      }
-
       const containerRect = containerRef.current.getBoundingClientRect();
       const x = e.clientX - containerRect.left;
-      const y = e.clientY - containerRect.top - window.scrollY;
+      const y = e.clientY - containerRect.top;
 
-      isScrolling.current = false;
-
+      // Verifica se está sobre texto para aumentar a máscara
       const elements = document.elementsFromPoint(e.clientX, e.clientY);
       const isOverText = elements.some(
         (el) =>
@@ -126,29 +76,19 @@ const SingleProjectReveal = ({
       );
 
       setMaskSize(isOverText ? 180 : 20);
-      setPosition({
-        x,
-        y: y,
-        scrollY: window.scrollY,
-      });
     };
 
-    const handleScroll = () => {
-      isScrolling.current = true;
-      setPosition((prev) => ({
-        ...prev,
-        scrollY: window.scrollY,
-      }));
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("mousemove", handleMouseMove);
+    }
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
+      if (container) {
+        container.removeEventListener("mousemove", handleMouseMove);
+      }
     };
-  }, []);
+  }, [setMaskSize]);
 
   return (
     <div
@@ -168,17 +108,17 @@ const SingleProjectReveal = ({
               objectFit="cover"
             />
           )}
-          <h2 className="text-center text-4xl text-foreground font-pt-mono text-element transition-all duration-300 ease-out">
+          <h2 className="text-center text-4xl text-foreground font-pt-mono text-element">
             {title}
           </h2>
-          <p className="text-base text-foreground font-fira-mono text-element transition-all duration-300 ease-out">
+          <p className="text-base text-foreground font-fira-mono text-element">
             {description}
           </p>
           <div className="flex flex-wrap font-fira-mono gap-4 text-start text-element">
             {tags.map((tag, i) => (
               <div
                 key={i}
-                className="border-foreground text-foreground gap-3 border-2 rounded-lg px-2.5 py-1.5 text-sm text-element transition-all duration-300 ease-out"
+                className="border-foreground text-foreground gap-3 border-2 rounded-lg px-2.5 py-1.5 text-sm text-element"
               >
                 {tag}
               </div>
@@ -198,9 +138,6 @@ const SingleProjectReveal = ({
             "radial-gradient(circle var(--size, 0px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
           maskRepeat: "no-repeat",
           WebkitMaskRepeat: "no-repeat",
-          transition:
-            "mask-position 0.1s linear, -webkit-mask-position 0.1s linear",
-          willChange: "transform, mask-position, -webkit-mask-position",
         }}
       >
         <section className="flex flex-col gap-6 max-w-4xl p-8">

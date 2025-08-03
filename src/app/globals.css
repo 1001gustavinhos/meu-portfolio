@@ -3,6 +3,9 @@
 :root {
   --background: #2f2f2f;
   --foreground: #fff2eb;
+  --x: 50%;
+  --y: 50%;
+  --size: 0px;
 }
 
 @theme inline {
@@ -34,6 +37,7 @@ body {
 @theme {
   --font-fira-mono: "Fira Mono", monospace;
   --font-pt-mono: "PT Mono", monospace;
+  --font-fascinate: "Fascinate";
 }
 
 .reveal-layer {
