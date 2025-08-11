@@ -44,7 +44,7 @@ const SingleProjectReveal = ({
 }: Project) => {
   const revealRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { position, smoothMaskSize, setMaskSize, hasMouseMoved } = useMask();
+  const { position, smoothMaskSize, setMaskSize } = useMask();
 
   // Atualiza a posição da máscara
   useEffect(() => {

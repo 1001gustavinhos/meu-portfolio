@@ -57,8 +57,8 @@ export const MaskProvider = ({ children }: { children: React.ReactNode }) => {
   // Animação suave da máscara
   useEffect(() => {
     const animate = () => {
-      const positionLerpFactor = 0.2; // Fator de suavização para posição
-      const sizeLerpFactor = 0.1; // Fator de suavização para tamanho
+      const positionLerpFactor = 0.5; // Fator de suavização para posição
+      const sizeLerpFactor = 0.2; // Fator de suavização para tamanho
 
       // Interpolação para movimento suave
       const smoothX = lerp(
