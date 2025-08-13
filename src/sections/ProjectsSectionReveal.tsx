@@ -64,10 +64,6 @@ const SingleProjectReveal = ({
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
 
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - containerRect.left;
-      const y = e.clientY - containerRect.top;
-
       // Verifica se está sobre texto para aumentar a máscara
       const elements = document.elementsFromPoint(e.clientX, e.clientY);
       const isOverText = elements.some(
@@ -96,16 +92,15 @@ const SingleProjectReveal = ({
       className="relative w-full min-h-screen overflow-hidden flex items-center justify-center"
     >
       {/* Camada de fundo */}
-      <div className="absolute inset-0 bg-background z-0 flex items-center justify-center">
+      <div className="relative inset-0 bg-background z-0 flex items-center justify-center">
         <section className="flex flex-col gap-6 max-w-4xl p-8 text-element">
           {image && (
             <Image
               src={image}
-              className="bg-foreground flex mx-auto shadow-md mb-4 transition-all duration-300 ease-out"
+              className="bg-foreground flex mx-auto shadow-md mb-4 transition-all duration-300 ease-out object-cover"
               alt={altText}
               width={696 / 2}
               height={1000 / 2}
-              objectFit="cover"
             />
           )}
           <h2 className="text-center text-4xl text-foreground font-pt-mono text-element">
@@ -144,11 +139,10 @@ const SingleProjectReveal = ({
           {imageReveal && (
             <Image
               src={imageReveal}
-              className="bg-background flex mx-auto shadow-md mb-4"
+              className="bg-background flex mx-auto shadow-md mb-4 object-cover"
               alt={altText}
               width={696 / 2}
               height={1000 / 2}
-              objectFit="cover"
             />
           )}
           <h2 className="text-center text-4xl text-background font-pt-mono">
