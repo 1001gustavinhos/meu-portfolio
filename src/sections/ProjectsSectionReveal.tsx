@@ -71,7 +71,7 @@ const SingleProjectReveal = ({
           el.classList.contains("text-element") || el.closest(".text-element")
       );
 
-      setMaskSize(isOverText ? 180 : 20);
+      setMaskSize(isOverText ? 220 : 20);
     };
 
     const container = containerRef.current;
@@ -97,10 +97,10 @@ const SingleProjectReveal = ({
           {image && (
             <Image
               src={image}
-              className="bg-foreground flex mx-auto shadow-md mb-4 transition-all duration-300 ease-out object-cover"
+              className="bg-foreground flex mx-auto shadow-md mb-4 saturate-0 object-cover"
               alt={altText}
-              width={696 / 2}
-              height={1000 / 2}
+              width={1920}
+              height={1080}
             />
           )}
           <h2 className="text-center text-4xl text-foreground font-pt-mono text-element">
@@ -135,15 +135,19 @@ const SingleProjectReveal = ({
           WebkitMaskRepeat: "no-repeat",
         }}
       >
-        <section className="flex flex-col gap-6 max-w-4xl p-8">
+        <section className="flex flex-col gap-6 max-w-4xl p-8 text-element">
           {imageReveal && (
-            <Image
-              src={imageReveal}
-              className="bg-background flex mx-auto shadow-md mb-4 object-cover"
-              alt={altText}
-              width={696 / 2}
-              height={1000 / 2}
-            />
+            <video
+              width="1920"
+              height="1080"
+              muted
+              autoPlay
+              loop
+              playsInline
+              className="w-full h-auto flex mx-auto shadow-md mb-4"
+            >
+              <source src={imageReveal} type="video/mp4" />
+            </video>
           )}
           <h2 className="text-center text-4xl text-background font-pt-mono">
             {title}
