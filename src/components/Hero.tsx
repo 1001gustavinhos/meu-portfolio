@@ -1,12 +1,19 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useMask } from "@/context/MaskContext";
+import { SocialIcons } from "@/components/SocialIcon";
+import { AutoType } from "@/components/AutoType";
 
 export const HeroReveal = () => {
   const revealRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { position, smoothMaskSize, setMaskSize, getRelativePosition } =
-    useMask();
+  const {
+    smoothPosition,
+    smoothMaskSize,
+    setMaskSize,
+    getRelativePosition,
+    hasMouseMoved,
+  } = useMask();
 
   // Atualiza a posição da máscara
   useEffect(() => {
@@ -14,31 +21,36 @@ export const HeroReveal = () => {
 
     const relativePos = getRelativePosition(
       containerRef.current,
-      position.x,
-      position.y
+      smoothPosition.x,
+      smoothPosition.y
     );
 
     revealRef.current.style.setProperty("--x", `${relativePos.x}px`);
     revealRef.current.style.setProperty("--y", `${relativePos.y}px`);
     revealRef.current.style.setProperty("--size", `${smoothMaskSize}px`);
-  }, [position, smoothMaskSize, getRelativePosition]);
+  }, [smoothPosition, smoothMaskSize, getRelativePosition]);
 
-  // Configura o tamanho da máscara quando o mouse entra no hero
+  // Configura o comportamento padrão da máscara
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
 
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - containerRect.left;
-      const y = e.clientY - containerRect.top;
-      // Verifica se está sobre texto para aumentar a máscara
       const elements = document.elementsFromPoint(e.clientX, e.clientY);
-      const isOverText = elements.some(
-        (el) =>
-          el.classList.contains("text-element") || el.closest(".text-element")
+      const isOverIcon = elements.some((el) =>
+        el.closest("[data-social-icon]")
+      );
+      const isOverText = elements.some((el) =>
+        el.classList.contains("text-element")
       );
 
-      setMaskSize(isOverText ? 180 : 20);
+      // Não faz nada se estiver sobre um ícone (o ícone controla seu próprio estado)
+      if (isOverIcon) return;
+
+      setMaskSize(isOverText ? 220 : 20);
+
+      if (!hasMouseMoved.current) {
+        hasMouseMoved.current = true;
+      }
     };
 
     const container = containerRef.current;
@@ -51,7 +63,7 @@ export const HeroReveal = () => {
         container.removeEventListener("mousemove", handleMouseMove);
       }
     };
-  }, [setMaskSize]);
+  }, [setMaskSize, hasMouseMoved]);
 
   return (
     <div
@@ -59,9 +71,15 @@ export const HeroReveal = () => {
       className="relative w-full min-h-screen flex items-center justify-center bg-background"
     >
       {/* Camada de fundo (texto normal) */}
-      <h1 className="absolute text-9xl font-fascinate text-element select-none text-foreground">
-        gAsaD
-      </h1>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="absolute md:text-9xl text-8xl font-fascinate text-element select-none text-foreground">
+          gAsaD
+        </h1>
+        <div className="size-2 md:size-3 rounded-full bg-background absolute" />
+      </div>
+      <h2 className="md:mt-55 mt-40 text-foreground md:text-2xl text-xl font-pt-mono text-element">
+        Gustavo Alencar A. S. Dantas
+      </h2>
 
       {/* Camada de reveal (texto com efeito) */}
       <div
@@ -77,10 +95,19 @@ export const HeroReveal = () => {
           willChange: "transform, mask-position, -webkit-mask-position",
         }}
       >
-        <h1 className="text-9xl font-fascinate  text-element select-none text-background">
-          gAsaD
-        </h1>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h1 className="absolute md:text-9xl text-8xl font-fascinate text-element select-none text-background">
+            gAsaD
+          </h1>
+
+          <div className="size-2 md:size-3 rounded-full bg-foreground absolute" />
+        </div>
+        <AutoType
+          className="md:mt-55 mt-40 text-background md:text-2xl text-xl font-fira-mono"
+          cursorColor="bg-background"
+        />
       </div>
+      <SocialIcons />
     </div>
   );
 };

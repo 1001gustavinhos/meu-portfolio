@@ -2,6 +2,7 @@
 import { ProjectsReveal } from "@/sections/ProjectsSectionReveal";
 import { MaskProvider } from "@/context/MaskContext";
 import { HeroReveal } from "@/components/Hero";
+import { Footer } from "@/sections/Footer";
 
 const projects = [
   {
@@ -40,6 +41,7 @@ export default function Home() {
         <HeroReveal />
         <ProjectsReveal projects={projects} />
       </main>
+      <Footer />
     </MaskProvider>
   );
 }

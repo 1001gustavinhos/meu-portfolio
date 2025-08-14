@@ -44,20 +44,20 @@ const SingleProjectReveal = ({
 }: Project) => {
   const revealRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { position, smoothMaskSize, setMaskSize } = useMask();
+  const { smoothPosition, smoothMaskSize, setMaskSize } = useMask();
 
   // Atualiza a posição da máscara
   useEffect(() => {
     if (!revealRef.current || !containerRef.current) return;
 
     const containerRect = containerRef.current.getBoundingClientRect();
-    const relativeX = position.x - containerRect.left;
-    const relativeY = position.y - containerRect.top;
+    const relativeX = smoothPosition.x - containerRect.left;
+    const relativeY = smoothPosition.y - containerRect.top;
 
     revealRef.current.style.setProperty("--x", `${relativeX}px`);
     revealRef.current.style.setProperty("--y", `${relativeY}px`);
     revealRef.current.style.setProperty("--size", `${smoothMaskSize}px`);
-  }, [position, smoothMaskSize]);
+  }, [smoothPosition, smoothMaskSize]);
 
   // Configura o tamanho da máscara quando o mouse entra no projeto
   useEffect(() => {
@@ -103,17 +103,17 @@ const SingleProjectReveal = ({
               height={1080}
             />
           )}
-          <h2 className="text-center text-4xl text-foreground font-pt-mono text-element">
+          <h2 className="text-center md:text-4xl text-2xl text-foreground font-pt-mono text-element">
             {title}
           </h2>
-          <p className="text-base text-foreground font-fira-mono text-element">
+          <p className="md:text-base text-sm text-foreground text-justify  font-fira-mono text-element">
             {description}
           </p>
           <div className="flex flex-wrap font-fira-mono gap-4 text-start text-element">
             {tags.map((tag, i) => (
               <div
                 key={i}
-                className="border-foreground text-foreground gap-3 border-2 rounded-lg px-2.5 py-1.5 text-sm text-element"
+                className="border-foreground text-foreground gap-3 md:border-2 border-1 rounded-lg px-2.5 py-1.5 md:text-sm  text-xs text-element"
               >
                 {tag}
               </div>
@@ -149,17 +149,17 @@ const SingleProjectReveal = ({
               <source src={imageReveal} type="video/webm" />
             </video>
           )}
-          <h2 className="text-center text-4xl text-background font-pt-mono">
+          <h2 className="text-center md:text-4xl text-2xl text-background font-pt-mono">
             {title}
           </h2>
-          <p className="text-base text-background font-fira-mono">
+          <p className="md:text-base text-sm text-justify text-background font-fira-mono">
             {description}
           </p>
           <div className="flex flex-wrap font-fira-mono gap-4 text-start">
             {tags.map((tag, i) => (
               <div
                 key={i}
-                className="border-background text-background gap-3 border-2 rounded-lg px-2.5 py-1.5 text-sm"
+                className="border-background text-background gap-3 md:border-2 border-1 md:text-sm  text-xs rounded-lg px-2.5 py-1.5"
               >
                 {tag}
               </div>
