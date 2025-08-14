@@ -146,7 +146,7 @@ const SingleProjectReveal = ({
               playsInline
               className="w-full h-auto flex mx-auto shadow-md mb-4"
             >
-              <source src={imageReveal} type="video/mp4" />
+              <source src={imageReveal} type="video/webm" />
             </video>
           )}
           <h2 className="text-center text-4xl text-background font-pt-mono">

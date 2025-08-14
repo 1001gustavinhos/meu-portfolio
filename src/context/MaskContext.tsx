@@ -54,13 +54,11 @@ export const MaskProvider = ({ children }: { children: React.ReactNode }) => {
     };
   };
 
-  // Animação suave da máscara
   useEffect(() => {
     const animate = () => {
-      const positionLerpFactor = 0.5; // Fator de suavização para posição
-      const sizeLerpFactor = 0.2; // Fator de suavização para tamanho
+      const positionLerpFactor = 2;
+      const sizeLerpFactor = 0.2;
 
-      // Interpolação para movimento suave
       const smoothX = lerp(
         lastPosition.current.x,
         position.x,
@@ -73,12 +71,10 @@ export const MaskProvider = ({ children }: { children: React.ReactNode }) => {
         positionLerpFactor
       );
 
-      // Tamanho da máscara com suavização
       const targetSize = hasMouseMoved.current ? maskSize : 0;
       const newSmoothSize = lerp(smoothMaskSize, targetSize, sizeLerpFactor);
       setSmoothMaskSize(newSmoothSize);
 
-      // Atualiza a posição de referência
       lastPosition.current = {
         x: smoothX,
         y: smoothY,
@@ -97,14 +93,8 @@ export const MaskProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, [position, maskSize]);
 
-  // Configura listeners de mouse e scroll
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Debounce para melhor performance
-      if (mouseMoveTimeout.current) {
-        clearTimeout(mouseMoveTimeout.current);
-      }
-
       mouseMoveTimeout.current = setTimeout(() => {
         if (!hasMouseMoved.current) {
           hasMouseMoved.current = true;
@@ -131,7 +121,7 @@ export const MaskProvider = ({ children }: { children: React.ReactNode }) => {
         const touch = e.touches[0];
         if (!hasMouseMoved.current) {
           hasMouseMoved.current = true;
-          setMaskSize(20);
+          setMaskSize(0); // Tamanho inicial para toque
         }
 
         setPosition({
