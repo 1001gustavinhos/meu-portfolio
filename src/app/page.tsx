@@ -1,8 +1,10 @@
 "use client";
 import { ProjectsReveal } from "@/sections/ProjectsSectionReveal";
 import { MaskProvider } from "@/context/MaskContext";
-import { HeroReveal } from "@/components/Hero";
+import { HeroReveal } from "@/sections/Hero";
 import { Footer } from "@/sections/Footer";
+import { SocialIcons } from "@/components/SocialIcon";
+import { AboutSection } from "@/sections/About";
 
 const projects = [
   {
@@ -39,7 +41,9 @@ export default function Home() {
     <MaskProvider>
       <main className="flex flex-col items-center justify-center">
         <HeroReveal />
+        <AboutSection />
         <ProjectsReveal projects={projects} />
+        <SocialIcons />
       </main>
       <Footer />
     </MaskProvider>

@@ -2,6 +2,7 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { useMask } from "@/context/MaskContext";
+import { SocialIcons } from "@/components/SocialIcon";
 
 interface Project {
   title: string;
@@ -89,11 +90,11 @@ const SingleProjectReveal = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center"
+      className="relative w-full h-screen max-h-[1200px] flex items-center justify-center bg-background"
     >
       {/* Camada de fundo */}
       <div className="relative inset-0 bg-background z-0 flex items-center justify-center">
-        <section className="flex flex-col gap-6 max-w-4xl p-8 text-element">
+        <section className="flex flex-col gap-6 max-w-4xl max-h-[1200px] p-8 text-element">
           {image && (
             <Image
               src={image}
@@ -135,7 +136,7 @@ const SingleProjectReveal = ({
           WebkitMaskRepeat: "no-repeat",
         }}
       >
-        <section className="flex flex-col gap-6 max-w-4xl p-8 text-element">
+        <section className="flex flex-col gap-6 max-w-4xl  p-8 text-element">
           {imageReveal && (
             <video
               width="1920"
