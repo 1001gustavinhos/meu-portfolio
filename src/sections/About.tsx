@@ -76,23 +76,22 @@ export const AboutSection = () => {
         {/* Container do texto */}
         <div className="space-y-6 ">
           <h2 className="text-4xl font-bold font-pt-mono text-foreground">
-            Sobre mim
+            Prazer!
           </h2>
 
-          <div className="space-y-4 text-foreground/90 font-fira-mono about-text">
+          <div className="space-y-4 text-foreground font-fira-mono about-text">
             <p>
-              Desenvolvedor fullstack com formação em Biologia, combinando
-              pensamento científico com habilidades técnicas para criar soluções
-              inovadoras.
+              Meu nome é{" "}
+              <span className="font-bold">Gustavo Alencar S.A. Dantas</span>{" "}
+              desenvolvedor Web/Mobile. Trabalho com React, Next.js, Tailwind e
+              React Native, focado em aparência, perfomance e responsividade.
             </p>
             <p>
-              Minha jornada me levou de laboratórios de pesquisa ao
-              desenvolvimento de software, onde encontrei minha paixão por
-              resolver problemas complexos através da tecnologia.
+              Além da computação, tenho formação em biologia com um artigo
+              publicado. Você pode ver meu currículo e trabalhos abaixo.
             </p>
             <p>
-              Especializado em React, Node.js e arquitetura de sistemas, busco
-              sempre aliar eficiência técnica com design intuitivo.
+              Está precisando colocar suas ideias em prática? Entre em contato!
             </p>
           </div>
 
@@ -144,23 +143,24 @@ export const AboutSection = () => {
           {/* Container do texto reveal */}
           <div className="space-y-6">
             <h2 className="text-4xl font-bold font-pt-mono text-background">
-              mim erboS
+              Prazer!
             </h2>
 
             <div className="space-y-4 text-background/90 font-fira-mono about-text">
               <p>
-                Desenvolvedor fullstack com formação em Biologia, combinando
-                pensamento científico com habilidades técnicas para criar
-                soluções inovadoras.
+                Meu nome é{" "}
+                <span className="font-bold">Gustavo Alencar S.A. Dantas</span>{" "}
+                desenvolvedor Web/Mobile. Trabalho com React, Next.js, Tailwind
+                e React Native, focado em aparência, perfomance e
+                responsividade.
               </p>
               <p>
-                Minha jornada me levou de laboratórios de pesquisa ao
-                desenvolvimento de software, onde encontrei minha paixão por
-                resolver problemas complexos através da tecnologia.
+                Além da computação, tenho formação em biologia com um artigo
+                publicado. Você pode ver meu currículo e trabalhos abaixo.
               </p>
               <p>
-                Especializado em React, Node.js e arquitetura de sistemas, busco
-                sempre aliar eficiência técnica com design intuitivo.
+                Está precisando colocar suas ideias em prática? Entre em
+                contato!
               </p>
             </div>
 

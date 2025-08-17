@@ -18,7 +18,7 @@ export const Footer = () => {
               <h2 className="absolute text-5xl font-fascinate text-foreground">
                 gAsaD
               </h2>
-              <div className="size-1.5 rounded-full bg-background relative" />
+              <div className="size-[5px] rounded-full bg-background relative" />
             </div>
             <p className="text-foreground/80 font-fira-mono mt-2">
               Desenvolvedor Web/Mobile | Biólogo
