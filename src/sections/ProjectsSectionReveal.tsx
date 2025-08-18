@@ -104,7 +104,7 @@ const SingleProjectReveal = ({
               height={1080}
             />
           )}
-          <h2 className="text-center md:text-4xl text-2xl text-foreground font-pt-mono text-element">
+          <h2 className="text-center font-bold md:text-4xl text-2xl text-foreground font-pt-mono text-element">
             {title}
           </h2>
           <p className="md:text-base text-sm text-foreground text-justify  font-fira-mono text-element">
@@ -150,7 +150,7 @@ const SingleProjectReveal = ({
               <source src={imageReveal} type="video/webm" />
             </video>
           )}
-          <h2 className="text-center md:text-4xl text-2xl text-background font-pt-mono">
+          <h2 className="text-center font-bold md:text-4xl text-2xl text-background font-pt-mono">
             {title}
           </h2>
           <p className="md:text-base text-sm text-justify text-background font-fira-mono">
