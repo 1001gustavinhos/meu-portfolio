@@ -3,6 +3,8 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { useMask } from "@/context/MaskContext";
 import { DownloadIcon } from "@/components/SocialIcon";
+import aboutImage from "@/public/about.jpg";
+import sadAboutImage from "@/public/sadabout.jpg";
 
 export const AboutSection = () => {
   const revealRef = useRef<HTMLDivElement>(null);
@@ -66,7 +68,7 @@ export const AboutSection = () => {
         {/* Container da imagem */}
         <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
           <Image
-            src="/sadabout.jpg"
+            src={sadAboutImage}
             alt="Gustavo Asa Dantas"
             fill
             className="w-full h-full object-cover saturate-0 about-text"
@@ -134,7 +136,7 @@ export const AboutSection = () => {
           {/* Container da imagem reveal */}
           <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
             <Image
-              src="/about.jpg"
+              src={aboutImage}
               alt="Gustavo Asa Dantas - Efeito"
               fill
               className="w-full h-full object-cover about-text"
