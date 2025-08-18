@@ -66,7 +66,7 @@ export const AboutSection = () => {
         {/* Container da imagem */}
         <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
           <Image
-            src="/sadabout.jpg"
+            src="/sadabout.JPG"
             alt="Gustavo Asa Dantas"
             fill
             className="w-full h-full object-cover saturate-0 about-text"
@@ -134,7 +134,7 @@ export const AboutSection = () => {
           {/* Container da imagem reveal */}
           <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
             <Image
-              src="/about.jpg"
+              src="/about.JPG"
               alt="Gustavo Asa Dantas - Efeito"
               fill
               className="w-full h-full object-cover about-text"
