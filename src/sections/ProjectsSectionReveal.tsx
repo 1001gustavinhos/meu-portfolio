@@ -2,12 +2,13 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { useMask } from "@/context/MaskContext";
-import { SocialIcons } from "@/components/SocialIcon";
+import { ExternalLink } from "lucide-react";
 
 interface Project {
   title: string;
   image: string;
   imageReveal: string;
+  externalLink: string;
   description: string;
   tags: string[];
   altText: string;
@@ -26,6 +27,7 @@ export const ProjectsReveal = ({ projects }: ProjectsRevealProps) => {
           title={project.title}
           image={project.image}
           imageReveal={project.imageReveal}
+          externalLink={project.externalLink}
           description={project.description}
           tags={project.tags}
           altText={project.altText}
@@ -40,6 +42,7 @@ const SingleProjectReveal = ({
   image,
   imageReveal,
   description,
+  externalLink,
   tags,
   altText,
 }: Project) => {
@@ -90,11 +93,11 @@ const SingleProjectReveal = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen max-h-[1200px] flex items-center justify-center bg-background"
+      className="relative w-full min-h-screen flex items-center justify-center bg-background"
     >
       {/* Camada de fundo */}
-      <div className="relative inset-0 bg-background z-0 flex items-center justify-center">
-        <section className="flex flex-col gap-6 max-w-4xl max-h-[1200px] p-8 text-element">
+      <div className="relative w-full h-full bg-background z-0 flex items-center justify-center">
+        <section className="flex flex-col gap-6 max-w-4xl p-8 text-element">
           {image && (
             <Image
               src={image}
@@ -104,9 +107,22 @@ const SingleProjectReveal = ({
               height={1080}
             />
           )}
-          <h2 className="text-center font-bold md:text-4xl text-2xl text-foreground font-pt-mono text-element">
-            {title}
-          </h2>
+          <div className="flex items-center justify-center gap-2">
+            <h2 className="text-center font-bold md:text-4xl text-2xl text-foreground font-pt-mono text-element">
+              {title}
+            </h2>
+            <a
+              href={externalLink}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="text-foreground hover:underline hover:text-primary transition-colors"
+            >
+              <ExternalLink
+                strokeWidth={2.5}
+                className="size-6 md:size-7 text-foreground ml-2"
+              />
+            </a>
+          </div>
           <p className="md:text-base text-sm text-foreground text-justify  font-fira-mono text-element">
             {description}
           </p>
@@ -126,7 +142,7 @@ const SingleProjectReveal = ({
       {/* Camada de reveal */}
       <div
         ref={revealRef}
-        className="absolute inset-0 bg-foreground z-10 flex items-center justify-center pointer-events-none"
+        className="absolute w-full h-full bg-foreground z-10 flex items-center justify-center pointer-events-none"
         style={{
           maskImage:
             "radial-gradient(circle var(--size, 0px) at var(--x, 50%) var(--y, 50%), white 99%, transparent 100%)",
@@ -145,14 +161,27 @@ const SingleProjectReveal = ({
               autoPlay
               loop
               playsInline
-              className="w-full h-auto flex mx-auto shadow-md mb-4"
+              className="w-full h-full object-cover mx-auto shadow-md mb-4"
             >
               <source src={imageReveal} type="video/webm" />
             </video>
           )}
-          <h2 className="text-center font-bold md:text-4xl text-2xl text-background font-pt-mono">
-            {title}
-          </h2>
+          <div className="flex items-center justify-center gap-2">
+            <h2 className="text-center font-bold md:text-4xl text-2xl text-background font-pt-mono">
+              {title}
+            </h2>
+            <a
+              href={externalLink}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="text-foreground hover:underline hover:text-primary transition-colors"
+            >
+              <ExternalLink
+                strokeWidth={2.5}
+                className="size-6 md:size-7 text-background ml-2"
+              />
+            </a>
+          </div>
           <p className="md:text-base text-sm text-justify text-background font-fira-mono">
             {description}
           </p>

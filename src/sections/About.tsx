@@ -75,16 +75,17 @@ export const AboutSection = () => {
 
         {/* Container do texto */}
         <div className="space-y-6 ">
-          <h2 className="text-4xl font-bold font-pt-mono text-foreground">
-            Prazer!
+          <h2 className="md:text-4xl text-2xl font-bold font-pt-mono text-foreground about-text">
+            Precisa de site ou app?
           </h2>
 
-          <div className="space-y-4 text-foreground font-fira-mono about-text">
+          <div className="space-y-4 text-foreground md:text-base text-sm font-fira-mono about-text">
             <p>
               Meu nome é{" "}
               <span className="font-bold">Gustavo Alencar S.A. Dantas</span>{" "}
-              desenvolvedor Web/Mobile. Trabalho com React, Next.js, Tailwind e
-              React Native, focado em aparência, perfomance e responsividade.
+              desenvolvedor Web/Mobile. Trabalho principalmente com React,
+              Next.js, Tailwind e React Native, focado em aparência, perfomance
+              e responsividade.
             </p>
             <p>
               Além da computação, tenho formação em biologia com um artigo
@@ -100,15 +101,15 @@ export const AboutSection = () => {
             <a
               href="/docs/curriculo-gustavo-asa-dantas.pdf"
               download
-              className="flex items-center border-2 border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground hover:bg-foreground hover:text-background rounded-lg transition-colors about-button"
+              className="flex items-center md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground hover:bg-foreground hover:text-background rounded-lg transition-colors about-button"
             >
-              <DownloadIcon className="w-5 h-5" />
+              <DownloadIcon className="md:size-5 size-4" />
               Baixar CV
             </a>
 
             <a
               href="https://wa.me/11981071231"
-              className="px-6 py-3 border-2 border-foreground font-fira-mono text-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors about-button"
+              className="px-6 py-3 md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono text-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors about-button"
             >
               Entrar em Contato
             </a>
@@ -142,17 +143,17 @@ export const AboutSection = () => {
 
           {/* Container do texto reveal */}
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold font-pt-mono text-background">
-              Prazer!
+            <h2 className="md:text-4xl text-2xl font-bold font-pt-mono text-background about-text">
+              Vamos trabalhar juntos!
             </h2>
 
-            <div className="space-y-4 text-background/90 font-fira-mono about-text">
+            <div className="space-y-4 text-background/90 md:text-base text-sm font-fira-mono about-text">
               <p>
                 Meu nome é{" "}
                 <span className="font-bold">Gustavo Alencar S.A. Dantas</span>{" "}
-                desenvolvedor Web/Mobile. Trabalho com React, Next.js, Tailwind
-                e React Native, focado em aparência, perfomance e
-                responsividade.
+                desenvolvedor Web/Mobile. Trabalho principalmente com React,
+                Next.js, Tailwind e React Native, focado em aparência,
+                perfomance e responsividade.
               </p>
               <p>
                 Além da computação, tenho formação em biologia com um artigo
@@ -169,16 +170,16 @@ export const AboutSection = () => {
               <div
                 onMouseEnter={() => !isMobile && setMaskSize(0)}
                 onMouseLeave={() => !isMobile && setMaskSize(20)}
-                className="flex items-center border-2 border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground rounded-lg transition-colors about-button"
+                className="flex items-center md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground rounded-lg transition-colors about-button"
               >
-                <DownloadIcon className="w-5 h-5" />
+                <DownloadIcon className="md:size-5 size-4" />
                 Baixar CV
               </div>
 
               <div
                 onMouseEnter={() => !isMobile && setMaskSize(0)}
                 onMouseLeave={() => !isMobile && setMaskSize(20)}
-                className="px-6 py-3 border-2 border-foreground font-fira-mono bg-background text-foreground hover:bg-foreground hover:text-background rounded-lg about-button"
+                className="px-6 py-3 md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono bg-background text-foreground hover:bg-foreground hover:text-background rounded-lg about-button"
               >
                 Entrar em Contato
               </div>

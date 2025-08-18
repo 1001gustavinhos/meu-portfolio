@@ -88,10 +88,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  manifest: "/site.webmanifest",
-  verification: {
-    google: "seuGoogleVerificationCode",
-  },
 };
 
 export default function RootLayout({
@@ -104,9 +100,7 @@ export default function RootLayout({
       lang="pt-br"
       className={`${firaMono.variable} ${ptMono.variable} ${fascinate.variable}`}
     >
-      <body className="min-h-screen bg-background text-foreground">
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
