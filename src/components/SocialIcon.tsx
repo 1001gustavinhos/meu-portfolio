@@ -75,7 +75,7 @@ export const InstagramIcon = ({ className = "" }: { className?: string }) => {
   return (
     <SocialIcon
       className={className}
-      href="https://instagram.com/seuusuario"
+      href="https://www.instagram.com/1001passarinhos/"
       icon={<Instagram className="md:w-6 md:h-6 w-5 h-5" />}
     />
   );

@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "gAsaD | Desenvolvedor Web/Mobile",
     description:
-      "Portfólio de Gustavo Asa Dantas - Desenvolvedor Web/Mobile. Soluções simples, criativas e úteis.",
+      "Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile. Soluções simples, criativas e úteis.",
     url: "https://gasad.com.br",
     siteName: "gAsaD Portfolio",
     images: [

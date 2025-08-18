@@ -99,7 +99,7 @@ export const AboutSection = () => {
           {/* Botões de ação */}
           <div className="flex flex-wrap gap-4 pt-4">
             <a
-              href="/docs/curriculo-gustavo-asa-dantas.pdf"
+              href="/Gustavo ASAD - CV.pdf"
               download
               aria-label="Download CV"
               className="flex items-center md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground hover:bg-foreground hover:text-background rounded-lg transition-colors about-button"
