@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio Interativo - gAsaD
 
-## Getting Started
+## Descrição do Projeto
+Portfólio profissional desenvolvido com Next.js e React, apresentando um design animado interativo com efeito de revelação.
 
-First, run the development server:
+## Tecnologias Principais
 
+- **Framework**: Next.js 15.4.1
+- **Biblioteca UI**: React 19
+- **Estilização**: Tailwind CSS
+- **Ícones**: Lucide React
+- **TypeScript**: Para tipagem estática
+
+## Instalação
+
+1. Clone o repositório:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/1001gustavinhos/meu-portfolio.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale as dependências:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Comandos Disponíveis
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev`: Inicia o servidor de desenvolvimento
+- `npm run build`: Cria uma versão otimizada para produção
+- `npm run start`: Inicia o servidor de produção
+- `npm run lint`: Executa análise de código com ESLint
 
-## Learn More
+## Dependências
 
-To learn more about Next.js, take a look at the following resources:
+### Dependências de Produção
+| Pacote | Versão | Descrição |
+|--------|--------|-----------|
+| lucide-react | ^0.539.0 | Biblioteca de ícones |
+| next | 15.4.1 | Framework React |
+| react | 19.1.0 | Biblioteca principal |
+| react-dom | 19.1.0 | Renderização React para DOM |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Dependências de Desenvolvimento
+| Pacote | Versão | Descrição |
+|--------|--------|-----------|
+| @types/node | ^20 | Tipos para Node.js |
+| @types/react | ^19 | Tipos para React |
+| eslint | ^9 | Linter JavaScript |
+| tailwindcss | ^4 | Framework CSS |
+| typescript | ^5 | Suporte a TypeScript |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ✨ Destaques
+⚡ Performance otimizada (nota máxima no Lighthouse)
 
-## Deploy on Vercel
+📱 Design totalmente responsivo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🎨 Efeitos visuais interativos
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🔍 SEO aprimorado
+
+🔗 Links para contato e projetos
+
+
+### 📊 Resultados Lighthouse
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 2rem 0;"> <div> <h3>Desktop</h3> <img width="538" height="706" alt="image" src="https://github.com/user-attachments/assets/b8e6e198-5dae-4830-9e58-ebb35f97cab7" />
+</div> <div> <h3>Mobile</h3> <img width="377" height="797" alt="image" src="https://github.com/user-attachments/assets/c5e39845-5743-4f84-b549-b7bd4acf1571" />
+ </div> </div>
+
+## Configuração Recomendada
+
+- Node.js 18+
+- npm 9+
