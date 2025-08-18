@@ -61,7 +61,7 @@ npm install
 🔗 Links para contato e projetos
 
 
-###📊 Resultados Lighthouse
+### 📊 Resultados Lighthouse
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 2rem 0;"> <div> <h3>Desktop</h3> <img width="538" height="706" alt="image" src="https://github.com/user-attachments/assets/b8e6e198-5dae-4830-9e58-ebb35f97cab7" />
 </div> <div> <h3>Mobile</h3> <img width="377" height="797" alt="image" src="https://github.com/user-attachments/assets/c5e39845-5743-4f84-b549-b7bd4acf1571" />
  </div> </div>
