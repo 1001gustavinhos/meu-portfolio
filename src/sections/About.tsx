@@ -69,7 +69,7 @@ export const AboutSection = () => {
             src="/sadabout.jpg"
             alt="Gustavo Asa Dantas"
             fill
-            className="object-cover saturate-0 about-text"
+            className="w-full h-full object-cover saturate-0 about-text"
           />
         </div>
 
@@ -137,7 +137,7 @@ export const AboutSection = () => {
               src="/about.jpg"
               alt="Gustavo Asa Dantas - Efeito"
               fill
-              className="object-cover"
+              className="w-full h-full object-cover about-text"
             />
           </div>
 
