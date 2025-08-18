@@ -101,6 +101,7 @@ export const AboutSection = () => {
             <a
               href="/docs/curriculo-gustavo-asa-dantas.pdf"
               download
+              aria-label="Download CV"
               className="flex items-center md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground hover:bg-foreground hover:text-background rounded-lg transition-colors about-button"
             >
               <DownloadIcon className="md:size-5 size-4" />
@@ -109,6 +110,7 @@ export const AboutSection = () => {
 
             <a
               href="https://wa.me/11981071231"
+              aria-label="Entrar em Contato"
               className="px-6 py-3 md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono text-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors about-button"
             >
               Entrar em Contato

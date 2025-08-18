@@ -17,6 +17,7 @@ export const SocialIcon = ({ icon, href, className = "" }: SocialIconProps) => {
       target="_blank"
       rel="noopener noreferrer"
       data-social-icon="true"
+      aria-label="Social Icon"
       className={`${className} group relative flex items-center justify-center md:size-12 size-10 rounded-full transition-all duration-300 
                   text-foreground bg-background hover:text-background hover:bg-foreground`}
       onMouseEnter={() => {

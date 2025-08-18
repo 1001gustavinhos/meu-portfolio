@@ -114,6 +114,7 @@ const SingleProjectReveal = ({
             <a
               href={externalLink}
               target="_blank"
+              aria-label="External Link"
               rel="noopener noreferrer nofollow"
               className="text-foreground hover:underline hover:text-primary transition-colors"
             >
@@ -173,6 +174,7 @@ const SingleProjectReveal = ({
             <a
               href={externalLink}
               target="_blank"
+              aria-label="External Link"
               rel="noopener noreferrer nofollow"
               className="text-foreground hover:underline hover:text-primary transition-colors"
             >
