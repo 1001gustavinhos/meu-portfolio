@@ -1,4 +1,8 @@
-# Portfólio Interativo - gAsaD
+# Portfólio Interativo - gAsaD  
+
+## 🌐 Acesse o site
+
+🔗 [www.gasad.com.br](https://www.gasad.com.br)
 
 ## Descrição do Projeto
 Portfólio profissional desenvolvido com Next.js e React, apresentando um design animado interativo com efeito de revelação.
