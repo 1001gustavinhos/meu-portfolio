@@ -13,10 +13,10 @@ interface AutoTypeProps {
 export const AutoType = ({
   phrases = [
     "Desenvolvedor Web/Mobile",
+    "Designer gráfico",
     "Biólogo de apartamento",
-    "Pássaros ultrarealistas",
   ],
-  typingSpeed = 150,
+  typingSpeed = 100,
   deletingSpeed = 50,
   pauseBetween = 1000,
   className = "",
