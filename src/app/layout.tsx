@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | gAsaD",
   },
   description:
-    "Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile. Soluções simples, criativas e úteis.",
+    "Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile. Precisando de site ou app? Posso te ajudar!",
   keywords: [
     "desenvolvedor web",
     "desenvolvedor mobile",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "gAsaD | Desenvolvedor Web/Mobile",
     description:
-      "Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile. Soluções simples, criativas e úteis.",
+      "Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile. Precisando de site ou app? Posso te ajudar!",
     url: "https://gasad.com.br",
     siteName: "gAsaD Portfolio",
     images: [
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "gAsaD | Desenvolvedor Web/Mobile",
     description:
-      "Portfólio de Gustavo Asa Dantas - Desenvolvedor Web/Mobile. Soluções simples, criativas e úteis.",
+      "Portfólio de Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile. Precisando de site ou app? Posso te ajudar!",
     images: ["/og-image.jpg"],
   },
   robots: {

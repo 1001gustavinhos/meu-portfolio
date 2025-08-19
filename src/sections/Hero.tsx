@@ -71,7 +71,7 @@ export const HeroReveal = () => {
     >
       {/* Camada de fundo (texto normal) */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="absolute md:text-9xl text-8xl font-fascinate text-element select-none text-foreground">
+        <h1 className="absolute md:text-9xl text-8xl font-fascinate select-none text-foreground text-element">
           gAsaD
         </h1>
         <div className="size-2 md:size-3 rounded-full bg-background absolute" />

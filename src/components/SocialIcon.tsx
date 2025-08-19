@@ -1,6 +1,6 @@
 "use client";
 import { useMask } from "@/context/MaskContext";
-import { Twitter, Github, Linkedin, Instagram } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 
 interface SocialIconProps {
   icon: React.ReactNode;
@@ -21,10 +21,10 @@ export const SocialIcon = ({ icon, href, className = "" }: SocialIconProps) => {
       className={`${className} group relative flex items-center justify-center md:size-12 size-10 rounded-full transition-all duration-300 
                   text-foreground bg-background hover:text-background hover:bg-foreground`}
       onMouseEnter={() => {
-        setMaskSize(0); // Esconde a máscara completamente
+        setMaskSize(0);
       }}
       onMouseLeave={() => {
-        setMaskSize(20); // Volta ao tamanho padrão
+        setMaskSize(20);
       }}
     >
       {icon}
@@ -81,7 +81,6 @@ export const InstagramIcon = ({ className = "" }: { className?: string }) => {
   );
 };
 
-// Componente DownloadIcon (crie em components/Icons.tsx)
 export const DownloadIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

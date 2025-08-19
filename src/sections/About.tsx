@@ -83,9 +83,9 @@ export const AboutSection = () => {
             <p>
               Meu nome é{" "}
               <span className="font-bold">Gustavo Alencar S.A. Dantas</span>{" "}
-              desenvolvedor Web/Mobile. Trabalho principalmente com React,
-              Next.js, Tailwind e React Native, focado em aparência, perfomance
-              e responsividade.
+              desenvolvedor Web/Mobile. Trabalho principalmente com Typescript,
+              React, React Native, Tailwind e Next.js, focado em aparência,
+              perfomance e responsividade.
             </p>
             <p>
               Além da computação, tenho formação em biologia com um artigo
@@ -105,7 +105,7 @@ export const AboutSection = () => {
               className="flex items-center md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground hover:bg-foreground hover:text-background rounded-lg transition-colors about-button"
             >
               <DownloadIcon className="md:size-5 size-4" />
-              Baixar CV
+              Baixar CV (PDF)
             </a>
 
             <a
@@ -153,9 +153,9 @@ export const AboutSection = () => {
               <p>
                 Meu nome é{" "}
                 <span className="font-bold">Gustavo Alencar S.A. Dantas</span>{" "}
-                desenvolvedor Web/Mobile. Trabalho principalmente com React,
-                Next.js, Tailwind e React Native, focado em aparência,
-                perfomance e responsividade.
+                desenvolvedor Web/Mobile. Trabalho principalmente com
+                Typescript, React, React Native, Tailwind e Next.js, focado em
+                aparência, perfomance e responsividade.
               </p>
               <p>
                 Além da computação, tenho formação em biologia com um artigo
@@ -175,7 +175,7 @@ export const AboutSection = () => {
                 className="flex items-center md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono gap-2 px-6 py-3 bg-background text-foreground rounded-lg transition-colors about-button"
               >
                 <DownloadIcon className="md:size-5 size-4" />
-                Baixar CV
+                Baixar CV (PDF)
               </div>
 
               <div
