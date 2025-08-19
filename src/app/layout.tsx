@@ -100,6 +100,29 @@ export default function RootLayout({
       lang="pt-br"
       className={`${firaMono.variable} ${ptMono.variable} ${fascinate.variable}`}
     >
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="gAsaD | Desenvolvedor Web/Mobile" />
+        <meta
+          property="og:description"
+          content="Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile. Precisando de site ou app? Posso te ajudar!"
+        />
+        <meta property="og:image" content="https://gasad.com.br/og-image.jpg" />
+        <meta property="og:url" content="https://gasad.com.br" />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="gAsaD | Desenvolvedor Web/Mobile" />
+        <meta
+          name="twitter:description"
+          content="Portfólio de Gustavo A.S.A. Dantas - Desenvolvedor Web/Mobile"
+        />
+        <meta
+          name="twitter:image"
+          content="https://gasad.com.br/og-image.jpg"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

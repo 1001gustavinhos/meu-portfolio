@@ -70,6 +70,7 @@ export const AboutSection = () => {
             alt="Gustavo Asa Dantas"
             fill
             className="w-full h-full object-cover saturate-0 about-text"
+            unoptimized
           />
         </div>
 
