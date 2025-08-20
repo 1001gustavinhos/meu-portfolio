@@ -1,5 +1,6 @@
 "use client";
 import { useMask } from "@/context/MaskContext";
+import { WHATSAPP_LINK_DEV } from "@/utils/utils";
 import { Github, Linkedin, Instagram } from "lucide-react";
 
 interface SocialIconProps {
@@ -53,7 +54,7 @@ export const LinkedInIcon = ({ className = "" }: { className?: string }) => (
 export const WhatsAppIcon = ({ className = "" }: { className?: string }) => {
   return (
     <SocialIcon
-      href="https://wa.me/11981071231"
+      href={WHATSAPP_LINK_DEV}
       className={className}
       icon={
         <svg

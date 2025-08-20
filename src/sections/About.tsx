@@ -3,6 +3,7 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { useMask } from "@/context/MaskContext";
 import { DownloadIcon } from "@/components/SocialIcon";
+import { WHATSAPP_LINK_DEV } from "@/utils/utils";
 
 export const AboutSection = () => {
   const revealRef = useRef<HTMLDivElement>(null);
@@ -109,7 +110,9 @@ export const AboutSection = () => {
             </a>
 
             <a
-              href="https://wa.me/11981071231"
+              href={WHATSAPP_LINK_DEV}
+              rel="noopener noreferrer"
+              target="_blank"
               aria-label="Entrar em Contato"
               className="px-6 py-3 md:border-2 border-1 text-xs md:text-base border-foreground font-fira-mono text-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors about-button"
             >
