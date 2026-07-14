@@ -12,7 +12,7 @@
     "@gsap/react": "^2.1.2",
     "@types/gsap": "^1.20.2",
     "lucide-react": "^0.539.0",
-    "next": "15.4.1",
+    "next": "^16.2.10",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
@@ -26,5 +26,6 @@
     "eslint-config-next": "15.4.1",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@11.5.0+sha512.dbfcc4f81cf48597afd4bc391ffdf12c11f1a9fb83a395bfa6b0a2d9cc2fd8ffebafdb1ccbd529632153f793904c2615b7f09fe1a345473fd1c35845172a8eb1"
 }
