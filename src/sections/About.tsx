@@ -3,7 +3,6 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMask } from "@/context/MaskContext";
-import { WHATSAPP_LINK_DEV } from "@/utils/utils";
 import { ArrowRight } from "lucide-react";
 
 export const AboutSection = () => {
@@ -101,7 +100,7 @@ export const AboutSection = () => {
           {/* Botões de ação */}
           <div className='flex flex-wrap gap-4 pt-4'>
             <a
-              href={WHATSAPP_LINK_DEV}
+              href='mailto:gustavo.asa.dantas@gmail.com'
               rel='noopener noreferrer'
               target='_blank'
               aria-label='Entrar em Contato'
@@ -172,7 +171,7 @@ export const AboutSection = () => {
             {/* Botões de ação reveal */}
             <div className='flex flex-wrap gap-4 pt-4'>
               <a
-                href={WHATSAPP_LINK_DEV}
+                href='mailto:gustavo.asa.dantas@gmail.com'
                 rel='noopener noreferrer'
                 target='_blank'
                 aria-label='Entrar em Contato'
