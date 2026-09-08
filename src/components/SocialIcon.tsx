@@ -45,7 +45,7 @@ export const GitHubIcon = ({ className = "" }: { className?: string }) => (
 export const LinkedInIcon = ({ className = "" }: { className?: string }) => (
   <SocialIcon
     className={className}
-    href='https://www.linkedin.com/in/gustavo-alencar-silva-almeida-dantas-478148209/'
+    href='https://www.linkedin.com/in/gustavo-dantas-478148209/'
     icon={<Linkedin className='md:w-6 md:h-6 w-5 h-5' />}
   />
 );
