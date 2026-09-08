@@ -83,7 +83,7 @@ export const AboutSection = () => {
           <div className='space-y-4 text-foreground md:text-base text-sm font-fira-mono about-text'>
             <p>
               Meu nome é{" "}
-              <span className='font-bold'>Gustavo Alencar S.A. Dantas</span>{" "}
+              <span className='font-bold'>Gustavo A.S.A. Dantas</span>{" "}
               desenvolvedor Web/Mobile.
             </p>
             <p>
@@ -151,8 +151,7 @@ export const AboutSection = () => {
 
             <div className='space-y-4 text-background/90 md:text-base text-sm font-fira-mono about-text'>
               <p>
-                Meu nome é{" "}
-                <span className='font-bold'>Gustavo Alencar S.A. Dantas</span>{" "}
+                Meu nome é <span className='font-bold'>Gustavo Dantas</span>{" "}
                 desenvolvedor Web/Mobile.
               </p>
               <p>

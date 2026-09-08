@@ -6,7 +6,7 @@ import { ArrowLeft, ExternalLink, Mail, MapPin } from "lucide-react";
 export const metadata: Metadata = {
   title: "Currículo",
   description:
-    "Currículo online de Gustavo Alencar S.A. Dantas, com resumo profissional, habilidades, projetos e formação.",
+    "Currículo online de Gustavo A.S.A. Dantas, com resumo profissional, habilidades, projetos e formação.",
 };
 
 const technicalAreas = [
