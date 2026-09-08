@@ -79,7 +79,7 @@ export default function CurriculoPage() {
             <div className='relative mx-auto aspect-square w-36 shrink-0 overflow-hidden rounded-full border border-[#1c171218] bg-[#efe6dc] sm:mx-0'>
               <Image
                 src='/about.JPG'
-                alt='Foto de Gustavo Alencar S.A. Dantas'
+                alt='Foto de Gustavo A.S.A. Dantas'
                 fill
                 priority
                 sizes='176px'
@@ -93,7 +93,7 @@ export default function CurriculoPage() {
                   Perfil profissional
                 </p>
                 <h1 className='text-3xl font-bold tracking-tight sm:text-5xl'>
-                  Gustavo Alencar S.A. Dantas
+                  Gustavo A.S.A. Dantas
                 </h1>
                 <p className='max-w-2xl text-sm leading-6 text-[#4f433c] sm:text-base'>
                   Desenvolvedor front-end com foco em produtos web e mobile,
